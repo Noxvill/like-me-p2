@@ -120,12 +120,43 @@ if (result.rowCount) {
 
             throw err;
         }}
+        
 
+        const eliminarPosts = async (id) => {
+
+            try {
+                const consulta = "DELETE FROM posts WHERE id = $1 RETURNING *"
+            const values = [id]
+            const result = await database.query(consulta, values)
+    
+    if (result.rowCount) {
+        
+                return {
+                msg: 'Post eliminado',
+                data: result.rows[0]
+            };
+        } else {
+            return {
+                msg: 'No se pudo eliminar post',
+                data: []
+            }}
+    
+    
+            } catch (error) {
+                const err = new Error('Error en la consulta')
+                err.msg='badrequest'
+                err.status='400'
+                err.origin='Posts'
+                err.deails=error
+    
+                throw err;
+            }}
 const postCollection = {
 
     agregarPost,
     obtenerPosts,
-    modificarPosts
+    modificarPosts,
+    eliminarPosts
 
 }
 

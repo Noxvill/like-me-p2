@@ -15,8 +15,8 @@ GET  http://localhost:3000/api/posts/getPosts
 Content-Type: 'aplication/json'
 
 ###
-DELETE http://localhost:3000/api/posts/delPosts/1
-Content-Type: application/json
-###
 PUT  http://localhost:3000/api/posts/put/2?likes=9999
+Content-Type: application/json
+####
+Delete  http://localhost:3000/api/posts/delete/2
 Content-Type: application/json

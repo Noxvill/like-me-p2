@@ -75,10 +75,30 @@ try {
  
   }
 
+  const delPostController = async (req, res, next) => {
+
+    try {
+    
+      const { id } = req.params
+      const response= await postCollection.eliminarPosts(id)
+      res.json(response)
+      // await modificarLikes(likes, id)
+      // res.send("Presupuesto modificado con éxito")
+      
+    } catch (error) {
+      next(error)
+    }
+    
+    
+    
+     
+      }
+
 module.exports={
 
 addPostController,
 getPostController,
-modPostController
+modPostController,
+delPostController
 
 }

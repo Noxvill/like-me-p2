@@ -15,7 +15,7 @@ export const addPost = async (post) => {
 };
 
 export const deletePost = async (id) => {
-  await axios.delete(`${API_URL}/${id}`);
+  await axios.delete(`${API_URL}/delete/${id}`);
 };
 
 // export const likePost = async (id) => {
