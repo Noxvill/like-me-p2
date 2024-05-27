@@ -90,10 +90,42 @@ const obtenerPosts = async () => {
     }
 };
 
+
+    const modificarPosts = async (id, likes) => {
+
+        try {
+            const consulta = "UPDATE posts SET likes = $1 WHERE id = $2 RETURNING *"
+        const values = [likes, id]
+        const result = await database.query(consulta, values)
+
+if (result.rowCount) {
+    
+            return {
+            msg: 'Post modificado',
+            data: result.rows[0]
+        };
+    } else {
+        return {
+            msg: 'No se pudo modificar post',
+            data: []
+        }}
+
+
+        } catch (error) {
+            const err = new Error('Error en la consulta')
+            err.msg='badrequest'
+            err.status='400'
+            err.origin='database'
+            err.deails=error
+
+            throw err;
+        }}
+
 const postCollection = {
 
     agregarPost,
-    obtenerPosts
+    obtenerPosts,
+    modificarPosts
 
 }
 

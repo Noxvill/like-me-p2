@@ -18,9 +18,9 @@ const {postCollection} = require('../../database/models/posts_models')
 
 const addPostController = async (req, res, next) => {
   try {
-    const { titulo, url, descripcion } = req.body; // me aseguro de usar 'url' en lugar de 'img'
-    const likes = 0; // inicializaré like en 0 para que no quede vacío desde el front
-    const response = await postCollection.agregarPost(titulo, url, descripcion, likes);
+    const { titulo, img, descripcion, likes } = req.body; // me aseguro de usar 'url' en lugar de 'img'
+    // const likes = 0; // inicializaré like en 0 para que no quede vacío desde el front
+    const response = await postCollection.agregarPost(titulo, img, descripcion, likes);
     res.send(response);
     console.log('Controlador nuevo de agregar');
   } catch (error) {
@@ -55,10 +55,30 @@ const getPostController = async (req, res, next) => {
   }
 };
 
+const modPostController = async (req, res, next) => {
+
+try {
+
+  const { id } = req.params
+  const { likes } = req.query
+  const response= await postCollection.modificarPosts(id, likes)
+  res.json(response)
+  // await modificarLikes(likes, id)
+  // res.send("Presupuesto modificado con éxito")
+  
+} catch (error) {
+  next(error)
+}
+
+
+
+ 
+  }
 
 module.exports={
 
 addPostController,
-getPostController
+getPostController,
+modPostController
 
 }
